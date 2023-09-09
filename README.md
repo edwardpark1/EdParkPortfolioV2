@@ -23,6 +23,8 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 - Glassmorphism elements
 - Responsive design
 
+![Particle animation section of my portfolio](public/assets/portfolio-preview.gif)
+
 ## Ideas for Future Implementation
 - Option for reduced motion
 - Enable testimonials section to accomodate more than one entry
