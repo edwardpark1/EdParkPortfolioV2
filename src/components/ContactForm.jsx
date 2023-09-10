@@ -144,9 +144,9 @@ export default function ContactForm() {
                 className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
                 action="/formconfirmation"
                 onSubmit={(e) => {
+                    e.preventDefault();
                     setContactErrors(formValidation(contactValues));
                     setIsContactSubmitted(true);
-                    e.preventDefault();
                 }}
             >
                 {contactFields.map((contactField, id) => (
