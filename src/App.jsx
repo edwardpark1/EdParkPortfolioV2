@@ -21,6 +21,7 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import ErrorPage from './pages/404';
+import FormConfirmation from './pages/FormConfirmation';
 
 function App() {
     // Dark Mode is default
@@ -72,6 +73,10 @@ function App() {
                 {
                     path: "resume",
                     element: <Resume />,
+                },
+                {
+                    path: "/formconfirmation",
+                    element: <FormConfirmation />,
                 },
                 {
                     // This is needed to avoid getting error when toggling light and dark mode within 404 page
