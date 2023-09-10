@@ -140,6 +140,7 @@ export default function ContactForm() {
                 data-netlify="true"
                 data-netlify-recaptcha="true"
                 className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
+                action="/formconfirmation"
                 onSubmit={(e) => {
                     setContactErrors(formValidation(contactValues));
                     setIsContactSubmitted(true);
