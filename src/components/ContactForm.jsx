@@ -147,6 +147,7 @@ export default function ContactForm() {
                     e.preventDefault();
                 }}
             >
+                <input type="hidden" name="form-name" value="contact-name" />
                 {contactFields.map((contactField, id) => (
                     <div key={id} className="mt-6 w-[100%] flex flex-col flex-nowrap items-center gap-3">
                         <label
