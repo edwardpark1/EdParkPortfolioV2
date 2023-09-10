@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://edpark.space/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/edwardpark1/EdParkPortfolioV2/src/assets/images/EdParkLogo.svg" height="100" /></a>
+<a href="https://edpark.space/" target="_blank"><img align="center" src="public/assets/images/EdParkLogo.svg" height="125" /></a>
 </p>
 
 <h1 align="center">Ed Park Portfolio Website</h1>
@@ -22,6 +22,8 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 - Cube image carousel
 - Glassmorphism elements
 - Responsive design
+
+![Particle animation section of my portfolio](public/assets/portfolio-preview.gif)
 
 ## Ideas for Future Implementation
 - Option for reduced motion
