@@ -1,4 +1,5 @@
 import {
+    createRef,
     useState,
     useEffect,
     useRef,
@@ -6,6 +7,9 @@ import {
 import {
     useNavigate
 } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_KEY = "6LcUQBQoAAAAAHApo4d_uUvtvCP2mHlww0ND2LVH";
 
 const contactFields = [
     {
@@ -37,6 +41,8 @@ const contactFields = [
 export default function ContactForm() {
     let navigate = useNavigate()
     const contactErrorExist = useRef(false);
+    const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
+    const recaptchaRef = createRef();
 
     const [contactValues, setContactValues] = useState(() => {
         const initialContactValues = {};
@@ -97,10 +103,16 @@ export default function ContactForm() {
 
     useEffect(() => {
         if (!contactErrorExist.current && isContactSubmitted) {
+            const recaptchaValue = recaptchaRef.current.getValue()
+
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encode({ "form-name": "contact-form", ...contactValues })
+                body: encode({
+                    "form-name": "contact-form",
+                    'g-recaptcha-response': recaptchaValue,
+                    ...contactValues
+                })
             })
                 .then(() => navigate('/formconfirmation', {
                     state: { isFormSubmitted: true }
@@ -119,12 +131,14 @@ export default function ContactForm() {
                     })
                 })
         }
-    }, [contactErrors, contactValues, isContactSubmitted, navigate])
+    }, [contactErrors, contactValues, isContactSubmitted, navigate, recaptchaRef])
 
     return (
         <>
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
             <form
+                data-netlify="true"
+                data-netlify-recaptcha="true"
                 className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
                 onSubmit={(e) => {
                     setContactErrors(formValidation(contactValues));
@@ -143,6 +157,7 @@ export default function ContactForm() {
                                         name={contactField.name}
                                         id={contactField.name}
                                         placeholder={contactField.placeholder}
+                                        required={contactField.isRequired}
                                         className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
                                         value={contactValues[contactField.name]}
                                         onChange={handleContact}>
@@ -155,6 +170,7 @@ export default function ContactForm() {
                                         name={contactField.name}
                                         id={contactField.name}
                                         placeholder={contactField.placeholder}
+                                        required={contactField.isRequired}
                                         className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
                                         value={contactValues[contactField.name]}
                                         onChange={handleContact}
@@ -169,8 +185,20 @@ export default function ContactForm() {
                         }
                     </div>
                 ))}
-                <p id="submit-status"></p>
-                <button type="submit" className="mt-10 glassy-icon px-6">Submit Message</button>
+                <ReCAPTCHA
+                    className="my-8"
+                    ref={recaptchaRef}
+                    sitekey={RECAPTCHA_KEY}
+                    size="normal"
+                    id="recaptcha-google"
+                    onChange={() => setSubmitBtnDisabled(false)}
+                />
+                <p id="submit-status" className="text-suppRed-300 self-start"></p>
+                <button
+                    type="submit"
+                    className="mt-8 glassy-icon px-6"
+                    disabled={submitBtnDisabled}
+                >Submit Message</button>
             </form>
         </>
     );
