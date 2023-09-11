@@ -103,14 +103,14 @@ export default function ContactForm() {
 
     useEffect(() => {
         if (!contactErrorExist.current && isContactSubmitted) {
-            // const recaptchaValue = recaptchaRef.current.getValue()
+            const recaptchaValue = recaptchaRef.current.getValue()
 
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: encode({
                     "form-name": "contact-form",
-                    // 'g-recaptcha-response': recaptchaValue,
+                    'g-recaptcha-response': recaptchaValue,
                     ...contactValues
                 })
             })
@@ -138,7 +138,7 @@ export default function ContactForm() {
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
             <form
                 data-netlify="true"
-                // data-netlify-recaptcha="true"
+                data-netlify-recaptcha="true"
                 className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
                 action="/formconfirmation"
                 onSubmit={(e) => {
@@ -186,14 +186,14 @@ export default function ContactForm() {
                         }
                     </div>
                 ))}
-                {/* <ReCAPTCHA
+                <ReCAPTCHA
                     className="my-8"
                     ref={recaptchaRef}
                     sitekey={RECAPTCHA_KEY}
                     size="normal"
                     id="recaptcha-google"
                     onChange={() => setSubmitBtnDisabled(false)}
-                /> */}
+                />
                 <p id="submit-status" className="text-suppRed-300 self-start"></p>
                 <button
                     type="submit"
