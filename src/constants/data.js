@@ -113,35 +113,6 @@ export const projects = [
         },
     },
     {
-        title: 'Movie App',
-        src: '/assets/images/projects/movie-app.webp',
-        altText: 'Screenshot of Ed&apos;s movie app home page',
-        ariaLabel: "Opens modal window with more information about the Movie App web project",
-        details: {
-            description: "Full-stack application that allows you to query The Movie Database (TMDB) for movie titles.",
-            technologies: [
-                {
-                    title: 'HTML',
-                    Icon: Icons.HtmlIcon,
-                },
-                {
-                    title: 'CSS',
-                    Icon: Icons.CSSIcon,
-                },
-                {
-                    title: 'JavaScript',
-                    Icon: Icons.JavascriptIcon,
-                },
-                {
-                    title: 'Node.js',
-                    Icon: Icons.NodeJSIcon,
-                },
-            ],
-            url: 'https://ed-movie-app.cyclic.app/',
-            githubUrl: 'https://github.com/edwardpark1/MovieApp',
-        },
-    },
-    {
         title: 'Blended Concoctions',
         src: '/assets/images/projects/blended-concoctions.webp',
         altText: 'Screenshot of Blended Concoctions home page',
