@@ -137,6 +137,8 @@ export default function ContactForm() {
         <>
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
             <form
+                name="contact-form"
+                method="POST"
                 data-netlify="true"
                 data-netlify-recaptcha="true"
                 className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
