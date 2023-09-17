@@ -1,0 +1,6 @@
+# Netlify would not honor React 404 handling so we do this
+[[redirects]]
+  from = "*"
+  to = "/error-404"
+  status = 404
+  force = false

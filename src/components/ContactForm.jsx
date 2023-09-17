@@ -1,207 +1,58 @@
-import {
-    createRef,
-    useState,
-    useEffect,
-    useRef,
-} from "react";
-import {
-    useNavigate
-} from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 
-const RECAPTCHA_KEY = "6LcUQBQoAAAAAHApo4d_uUvtvCP2mHlww0ND2LVH";
-
-const contactFields = [
-    {
-        name: "contact-name",
-        label: "Name",
-        type: "text",
-        placeholder: "Name",
-        isRequired: true,
-        maxLength: 50,
-    },
-    {
-        name: "contact-email",
-        label: "Email",
-        type: "email",
-        placeholder: "Email",
-        isRequired: true,
-        maxLength: 320,
-    },
-    {
-        name: "contact-message",
-        label: "Message",
-        type: "textarea",
-        placeholder: "Message",
-        isRequired: true,
-        maxLength: 5000,
-    }
-];
+const turnstileSiteKey = '0x4AAAAAAAKS1VVfqS6oXPTm';
+const useBasinFormId = '6ef567b5be7c';
 
 export default function ContactForm() {
-    let navigate = useNavigate()
-    const contactErrorExist = useRef(false);
-    const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
-    const recaptchaRef = createRef();
-
-    const [contactValues, setContactValues] = useState(() => {
-        const initialContactValues = {};
-        contactFields.map((field) => {
-            initialContactValues[field.name] = "";
-        });
-
-        return initialContactValues;
-    });
-
-    const [contactErrors, setContactErrors] = useState(() => {
-        const initialContactErrors = {};
-        contactFields.map((field) => {
-            initialContactErrors[field.name] = [];
-        });
-        return initialContactErrors;
-    });
-
-    const [isContactSubmitted, setIsContactSubmitted] = useState(false);
-
-    const handleContact = e => {
-        const { name, value } = e.target;
-
-        setContactValues({
-            ...contactValues,
-            [name]: value
-        })
-    }
-
-    const formValidation = (contactValues) => {
-        const errors = {};
-        contactErrorExist.current = false;
-
-        contactFields.map((field) => {
-            errors[field.name] = [];
-
-            if (field.isRequired) {
-                if (!contactValues[field.name]) {
-                    errors[field.name].push(`${field.label} must not be blank`);
-                    contactErrorExist.current = true;
-                }
-            }
-            else if (contactValues[field.name].length > field.maxLength) {
-                errors[field.name].push(`${field.label} must be ${field.maxLength} characters or less`);
-                contactErrorExist.current = true;
-            }
-        });
-
-        return errors;
-    }
-
-    // From Netlify documentation
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    }
-
-    useEffect(() => {
-        if (!contactErrorExist.current && isContactSubmitted) {
-            const recaptchaValue = recaptchaRef.current.getValue()
-
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encode({
-                    "form-name": "contact-form",
-                    'g-recaptcha-response': recaptchaValue,
-                    ...contactValues
-                })
-            })
-                .then(() => navigate('/formconfirmation', {
-                    state: { isFormSubmitted: true }
-                }))
-                .catch(() => {
-                    document.getElementById('submit-status').textContent = "Form failed to submit. Please try again.";
-                    contactErrorExist.current = false;
-                    setIsContactSubmitted(false);
-                    setContactValues(() => {
-                        const initialContactValues = {};
-                        contactFields.map((field) => {
-                            initialContactValues[field.name] = "";
-                        });
-
-                        return initialContactValues;
-                    })
-                })
-        }
-    }, [contactErrors, contactValues, isContactSubmitted, navigate, recaptchaRef])
-
     return (
         <>
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
+
             <form
-                name="contact-form"
+                action={`https://usebasin.com/f/${useBasinFormId}`}
                 method="POST"
-                data-netlify="true"
-                data-netlify-recaptcha="true"
-                className="max-w-read w-[100%] flex flex-col flex-nowrap items-center"
-                action="/formconfirmation"
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    setContactErrors(formValidation(contactValues));
-                    setIsContactSubmitted(true);
-                }}
+                className="w-[100%] flex flex-col flex-nowrap items-center gap-7"
             >
-                {contactFields.map((contactField, id) => (
-                    <div key={id} className="mt-6 w-[100%] flex flex-col flex-nowrap items-center gap-3">
-                        <label
-                            className="max-w-[30em] w-[100%]">
-                            {`${(contactField.isRequired ? "*" : "")}${contactField.label}`}
-                            {(contactField.type === "textarea") ?
-                                (
-                                    <textarea
-                                        name={contactField.name}
-                                        id={contactField.name}
-                                        placeholder={contactField.placeholder}
-                                        required={contactField.isRequired}
-                                        className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
-                                        value={contactValues[contactField.name]}
-                                        onChange={handleContact}>
-                                    </textarea>
-                                )
-                                :
-                                (
-                                    <input
-                                        type={contactField.type}
-                                        name={contactField.name}
-                                        id={contactField.name}
-                                        placeholder={contactField.placeholder}
-                                        required={contactField.isRequired}
-                                        className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
-                                        value={contactValues[contactField.name]}
-                                        onChange={handleContact}
-                                    />
-                                )
-                            }
-                        </label>
-                        {
-                            contactErrors[contactField.name].map((nameError, id) => (
-                                <p key={id} className="text-suppRed-300 self-start">{nameError}</p>
-                            ))
-                        }
-                    </div>
-                ))}
-                <ReCAPTCHA
-                    className="my-8"
-                    ref={recaptchaRef}
-                    sitekey={RECAPTCHA_KEY}
-                    size="normal"
-                    id="recaptcha-google"
-                    onChange={() => setSubmitBtnDisabled(false)}
-                />
-                <p id="submit-status" className="text-suppRed-300 self-start"></p>
+                <label className="max-w-[30em] w-[100%]">
+                    Full Name *
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="contact-name"
+                        className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
+                        placeholder="Name"
+                        required />
+                </label>
+
+                <label className="max-w-[30em] w-[100%]">
+                    Email Address *
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="contact-email"
+                        className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
+                        placeholder="Email"
+                        required />
+                </label>
+
+                <input type="hidden" name="_gotcha"></input>
+
+                <label className="max-w-[30em] w-[100%]">
+                    Message *
+                    <textarea
+                        id="contact-message"
+                        name="contact-message"
+                        rows="4"
+                        className="mt-3 px-5 py-4 bg-transparent border-2 border-solid border-neutGray-500 rounded-[5px] max-w-[30em] w-[100%] backdrop-blur-[5px]"
+                        placeholder="Your message here..."
+                        required
+                    />
+                </label>
+
+                <Turnstile siteKey={turnstileSiteKey} />
                 <button
                     type="submit"
-                    className="mt-8 glassy-icon px-6"
-                    disabled={submitBtnDisabled}
-                >Submit Message</button>
+                    className="mt-8 glassy-icon px-6">Submit Message</button>
             </form>
         </>
     );

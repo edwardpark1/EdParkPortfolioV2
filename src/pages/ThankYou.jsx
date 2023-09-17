@@ -1,16 +1,14 @@
 /*
-    File: FormConfirmation.jsx
+    File: ThankYou.jsx
     Author: Ed Park
     Copyright: 2023 - Ed Park https://edpark.space
     Version: 1.0
-    Created: 9/9/2023
-    Last Modified: 9/9/2023
 */
 
 import { useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-export default function FormConfirmation() {
+export default function ThankYou() {
     let navigate = useNavigate()
     const { state } = useLocation();
 

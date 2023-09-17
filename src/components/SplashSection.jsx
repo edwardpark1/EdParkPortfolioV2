@@ -518,7 +518,7 @@ export default function SplashSection({ splashMessage, isDarkMode, isErrorMode }
                     </g>
                 </svg>
             </div>
-            <canvas id="splash-intro" className="w-[100%] mt-3" aria-label="Interactive particle animation that displays text Ed Park Web Developer" role="img">Your browser does not support the HTML canvas tag.</canvas>
+            <canvas id="splash-intro" className="w-[100%] mt-3" aria-label={`Interactive particle animation that displays text ${splashMessage}`} role="img">Your browser does not support the HTML canvas tag.</canvas>
             <UseHero message={splashMessage} isDarkMode={isDarkMode} isErrorMode={isErrorMode} />
         </div>
     );
