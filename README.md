@@ -36,7 +36,7 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 ## How To Use
 Ensure you have the following installed on your computer:
 - [Git](https://git-scm.com)
-- [Node.js](https://nodejs.org/en/download/) (version 18.17.1 or greater)
+- [Node.js](https://nodejs.org/en/download/) (version 20.6.1 or greater)
 	- Installing Node.js will automatically include [npm](http://npmjs.com)
 
 In your command line:
