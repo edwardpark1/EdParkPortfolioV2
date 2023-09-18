@@ -60,9 +60,6 @@ export default function ContactForm() {
 
                 <Turnstile
                     siteKey={turnstileSiteKey}
-                    options={{
-                        execution: 'execute',
-                    }}
                 />
 
                 <button
