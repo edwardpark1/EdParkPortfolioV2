@@ -5,6 +5,7 @@
     Version: 1.0
 */
 
+import { useEffect } from "react";
 import {
     DEFAULT_SCRIPT_ID,
     SCRIPT_URL,
@@ -15,14 +16,23 @@ const turnstileSiteKey = '0x4AAAAAAAKS1VVfqS6oXPTm';
 const useBasinFormId = '6ef567b5be7c';
 
 export default function ContactForm() {
+    useEffect(() => {
+        const script = document.createElement('script');
+
+        script.id = DEFAULT_SCRIPT_ID;
+        script.src = SCRIPT_URL;
+        script.async = true;
+        script.defer = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
+
     return (
         <>
-            <script
-                id={DEFAULT_SCRIPT_ID}
-                src={SCRIPT_URL}
-                defer
-                async></script>
-
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
 
             <form
