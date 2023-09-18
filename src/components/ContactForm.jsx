@@ -6,6 +6,8 @@
 */
 
 import {
+    DEFAULT_SCRIPT_ID,
+    SCRIPT_URL,
     Turnstile,
 } from "@marsidev/react-turnstile";
 
@@ -15,6 +17,12 @@ const useBasinFormId = '6ef567b5be7c';
 export default function ContactForm() {
     return (
         <>
+            <script
+                id={DEFAULT_SCRIPT_ID}
+                src={SCRIPT_URL}
+                defer
+                async></script>
+
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
 
             <form
