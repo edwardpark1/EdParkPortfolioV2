@@ -16,20 +16,20 @@ const turnstileSiteKey = '0x4AAAAAAAKS1VVfqS6oXPTm';
 const useBasinFormId = '6ef567b5be7c';
 
 export default function ContactForm() {
-    useEffect(() => {
-        const script = document.createElement('script');
+    // useEffect(() => {
+    //     const script = document.createElement('script');
 
-        script.id = DEFAULT_SCRIPT_ID;
-        script.src = SCRIPT_URL;
-        script.async = true;
-        script.defer = true;
+    //     script.id = DEFAULT_SCRIPT_ID;
+    //     script.src = SCRIPT_URL;
+    //     script.async = true;
+    //     script.defer = true;
 
-        document.body.appendChild(script);
+    //     document.head.appendChild(script);
 
-        return () => {
-            document.body.removeChild(script);
-        }
-    }, []);
+    //     return () => {
+    //         document.head.removeChild(script);
+    //     }
+    // }, []);
 
     return (
         <>
