@@ -61,7 +61,6 @@ export default function ContactForm() {
 
                 <Turnstile
                     siteKey={turnstileSiteKey}
-                    injectScript={false}
                 />
                 <button
                     type="submit"
