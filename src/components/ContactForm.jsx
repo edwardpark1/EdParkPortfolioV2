@@ -5,7 +5,6 @@
     Version: 1.0
 */
 
-import { useEffect } from "react";
 import {
     DEFAULT_SCRIPT_ID,
     SCRIPT_URL,
