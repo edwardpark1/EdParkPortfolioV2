@@ -61,6 +61,9 @@ export default function ContactForm() {
 
                 <Turnstile
                     siteKey={turnstileSiteKey}
+                    scriptOptions={{
+                        appendTo: 'body'
+                    }}
                 />
                 <button
                     type="submit"
