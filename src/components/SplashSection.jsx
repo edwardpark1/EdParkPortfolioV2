@@ -347,6 +347,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 this.resize();
 
                 heroCanvas.canvas.addEventListener('mousemove', scatterParticleOnMove);
+                heroCanvas.canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+                heroCanvas.canvas.addEventListener('touchmove', handleTouchMove);
             }
 
             async setupText() {
@@ -452,6 +454,16 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             }
         }
 
+        function handleTouchStart(event) {
+            event.preventDefault();
+        }
+
+        function handleTouchMove(event) {
+            const elemOffset = heroCanvas.canvas.getBoundingClientRect();
+            effect.mouse.x = event.touches[0].x - elemOffset.left;
+            effect.mouse.y = event.touches[0].y - elemOffset.top;
+        }
+
         function scatterParticleOnMove(event) {
             const elemOffset = heroCanvas.canvas.getBoundingClientRect();
             effect.mouse.x = event.x - elemOffset.left;
@@ -497,6 +509,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             window.cancelAnimationFrame(animationId.current);
             window.removeEventListener('resize', resizeAnimationHandle);
             heroCanvas.canvas.removeEventListener('mousemove', scatterParticleOnMove);
+            heroCanvas.canvas.removeEventListener('touchstart', handleTouchStart, { passive: false });
+            heroCanvas.canvas.removeEventListener('touchmove', handleTouchMove);
         }
     }, [message, isDarkMode, isErrorMode]);
 }
