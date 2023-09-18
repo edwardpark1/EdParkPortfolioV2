@@ -348,7 +348,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
 
                 heroCanvas.canvas.addEventListener('mousemove', scatterParticleOnMove);
                 heroCanvas.canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-                heroCanvas.canvas.addEventListener('touchmove', handleTouchMove);
+                heroCanvas.canvas.addEventListener('touchmove', scatterParticleOnMove);
             }
 
             async setupText() {
@@ -458,16 +458,21 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             event.preventDefault();
         }
 
-        function handleTouchMove(event) {
-            const elemOffset = heroCanvas.canvas.getBoundingClientRect();
-            effect.mouse.x = event.touches[0].clientX - elemOffset.left;
-            effect.mouse.y = event.touches[0].clientY - elemOffset.top;
-        }
-
         function scatterParticleOnMove(event) {
             const elemOffset = heroCanvas.canvas.getBoundingClientRect();
-            effect.mouse.x = event.x - elemOffset.left;
-            effect.mouse.y = event.y - elemOffset.top;
+            let locX = 0;
+            let locY = 0;
+
+            if (event.type === 'touchmove') {
+                locX = event.touches[0].clientX;
+                locY = event.touches[0].clientY;
+            } else {
+                locX = event.x;
+                locY = event.y;
+            }
+
+            effect.mouse.x = locX - elemOffset.left;
+            effect.mouse.y = locY - elemOffset.top;
         }
 
         function animate() {
@@ -510,7 +515,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             window.removeEventListener('resize', resizeAnimationHandle);
             heroCanvas.canvas.removeEventListener('mousemove', scatterParticleOnMove);
             heroCanvas.canvas.removeEventListener('touchstart', handleTouchStart, { passive: false });
-            heroCanvas.canvas.removeEventListener('touchmove', handleTouchMove);
+            heroCanvas.canvas.removeEventListener('touchmove', scatterParticleOnMove);
         }
     }, [message, isDarkMode, isErrorMode]);
 }
