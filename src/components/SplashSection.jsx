@@ -351,9 +351,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 heroCanvas.canvas.addEventListener('touchmove', scatterParticleOnMove);
             }
 
-            setupText() {
+            async setupText(isSkipGetFont) {
                 // const gradient = this.context.createLinearGradient(0, 0, canvas.width, canvas.height);
-
                 const gradient = heroCanvas.ctx.createRadialGradient(heroCanvas.width / 2, heroCanvas.height / 2, 0,
                     heroCanvas.width / 2, heroCanvas.height / 2, heroCanvas.width / 2);
 
@@ -367,6 +366,11 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                     gradient.addColorStop(0.3, isDarkMode ? '#2251CC' : '#3A66DB');
                     gradient.addColorStop(0.6, isDarkMode ? '#061178' : '#132DAD');
                     gradient.addColorStop(1, isDarkMode ? '#2251CC' : '#3A66DB');
+                }
+
+                if (!isSkipGetFont) {
+                    // Need to run this synchronously to pick up custom font for canvas. Thanks a lot Turnstile library
+                    await this.getFont();
                 }
 
                 heroCanvas.ctx.strokeStyle = isDarkMode ? '#B0D0FF' : '#0A1C37';
@@ -404,6 +408,30 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 });
 
                 this.convertToParticles();
+            }
+
+            async getFont() {
+                // EdTest: Remember to remove assets folder in the paths
+                // Original path: /src/assets/fonts/Orbitron/orbitron-v29-latin-800.woff2
+                try {
+                    const font1 = new FontFace('Orbitron', 'url(/src/fonts/Orbitron/orbitron-v29-latin-800.woff2)', {
+                        style: "normal",
+                        weight: "800",
+                        display: "swap",
+                    });
+                    const font2 = new FontFace('Orbitron', 'url(/src/fonts/Orbitron/orbitron-v29-latin-800.ttf)', {
+                        style: "normal",
+                        weight: "800",
+                        display: "swap",
+                    });
+                    // await font.load();
+                    await Promise.all([font1.load(), font2.load()]);
+                    document.fonts.add(font1);
+                    document.fonts.add(font2);
+
+                } catch (error) {
+                    console.error(error);
+                }
             }
 
             convertToParticles() {
@@ -489,7 +517,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             heroCanvas.initializeCanvas();
             globe.initializeGlobe(heroCanvas.width, heroCanvas.height);
             effect.resize(heroCanvas.width, heroCanvas.height);
-            effect.setupText();
+            effect.setupText(true);
         }
 
         const splashMessage = message;
@@ -498,7 +526,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
         const effect = new Effect();
         let timeoutReset;
 
-        effect.setupText();
+        effect.setupText(false);
         effect.render();
         animate();
 

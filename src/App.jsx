@@ -74,7 +74,7 @@ function App() {
                 },
                 {
                     path: "thank-you",
-                    element: <ThankYou />,
+                    element: <ThankYou isDarkMode={isDarkMode} />,
                 },
                 {
                     // This is needed to avoid getting error when toggling light and dark mode within 404 page
