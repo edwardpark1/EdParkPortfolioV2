@@ -460,8 +460,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
 
         function handleTouchMove(event) {
             const elemOffset = heroCanvas.canvas.getBoundingClientRect();
-            effect.mouse.x = event.touches[0].x - elemOffset.left;
-            effect.mouse.y = event.touches[0].y - elemOffset.top;
+            effect.mouse.x = event.touches[0].clientX - elemOffset.left;
+            effect.mouse.y = event.touches[0].clientY - elemOffset.top;
         }
 
         function scatterParticleOnMove(event) {
