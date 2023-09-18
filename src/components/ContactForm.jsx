@@ -16,7 +16,6 @@ export default function ContactForm() {
     return (
         <>
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
-
             <form
                 name="contact-form"
                 action={`https://usebasin.com/f/${useBasinFormId}`}
@@ -61,10 +60,11 @@ export default function ContactForm() {
 
                 <Turnstile
                     siteKey={turnstileSiteKey}
-                    scriptOptions={{
-                        appendTo: 'body'
+                    options={{
+                        execution: 'execute',
                     }}
                 />
+
                 <button
                     type="submit"
                     className="mt-8 glassy-icon px-6">Submit Message</button>

@@ -351,7 +351,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 heroCanvas.canvas.addEventListener('touchmove', scatterParticleOnMove);
             }
 
-            async setupText() {
+            setupText() {
                 // const gradient = this.context.createLinearGradient(0, 0, canvas.width, canvas.height);
 
                 const gradient = heroCanvas.ctx.createRadialGradient(heroCanvas.width / 2, heroCanvas.height / 2, 0,
@@ -489,7 +489,6 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             heroCanvas.initializeCanvas();
             globe.initializeGlobe(heroCanvas.width, heroCanvas.height);
             effect.resize(heroCanvas.width, heroCanvas.height);
-            //do not attempt to get font since it's already loaded
             effect.setupText();
         }
 
