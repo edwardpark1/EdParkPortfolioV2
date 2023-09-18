@@ -5,7 +5,9 @@
     Version: 1.0
 */
 
-import { Turnstile } from "@marsidev/react-turnstile";
+import {
+    Turnstile,
+} from "@marsidev/react-turnstile";
 
 const turnstileSiteKey = '0x4AAAAAAAKS1VVfqS6oXPTm';
 const useBasinFormId = '6ef567b5be7c';
@@ -57,7 +59,10 @@ export default function ContactForm() {
                     />
                 </label>
 
-                <Turnstile siteKey={turnstileSiteKey} />
+                <Turnstile
+                    siteKey={turnstileSiteKey}
+                    injectScript={false}
+                />
                 <button
                     type="submit"
                     className="mt-8 glassy-icon px-6">Submit Message</button>
