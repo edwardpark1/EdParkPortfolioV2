@@ -6,8 +6,6 @@
 */
 
 import {
-    DEFAULT_SCRIPT_ID,
-    SCRIPT_URL,
     Turnstile,
 } from "@marsidev/react-turnstile";
 
@@ -15,21 +13,6 @@ const turnstileSiteKey = '0x4AAAAAAAKS1VVfqS6oXPTm';
 const useBasinFormId = '6ef567b5be7c';
 
 export default function ContactForm() {
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-
-    //     script.id = DEFAULT_SCRIPT_ID;
-    //     script.src = SCRIPT_URL;
-    //     script.async = true;
-    //     script.defer = true;
-
-    //     document.head.appendChild(script);
-
-    //     return () => {
-    //         document.head.removeChild(script);
-    //     }
-    // }, []);
-
     return (
         <>
             <p className="text-center">Fields marked with asterisk (*) cannot be left blank.</p>
