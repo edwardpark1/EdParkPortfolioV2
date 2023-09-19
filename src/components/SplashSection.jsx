@@ -7,6 +7,8 @@
 
 import { useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
+import headingFontLatest from '../fonts/Orbitron/orbitron-v29-latin-800.woff2';
+import headingFontBackup from '../fonts/Orbitron/orbitron-v29-latin-800.ttf';
 
 SplashSection.propTypes = {
     splashMessage: PropTypes.string.isRequired,
@@ -414,12 +416,12 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 // EdTest: Remember to remove assets folder in the paths
                 // Original path: /src/assets/fonts/Orbitron/orbitron-v29-latin-800.woff2
                 try {
-                    const font1 = new FontFace('Orbitron', 'url(/assets/orbitron-v29-latin-800.woff2)', {
+                    const font1 = new FontFace('Orbitron', `url(${headingFontLatest})`, {
                         style: "normal",
                         weight: "800",
                         display: "swap",
                     });
-                    const font2 = new FontFace('Orbitron', 'url(/assets/orbitron-v29-latin-800.ttf)', {
+                    const font2 = new FontFace('Orbitron', `url(${headingFontBackup})`, {
                         style: "normal",
                         weight: "800",
                         display: "swap",
