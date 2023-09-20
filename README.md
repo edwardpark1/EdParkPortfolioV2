@@ -26,6 +26,7 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 ![Particle animation section of my portfolio](public/assets/portfolio-preview.gif)
 
 ## Ideas for Future Implementation
+- Implement delta time and FPS for canvas animation
 - Option for reduced motion
 - Enable testimonials section to accomodate more than one entry
 - Custom mouse pointer
