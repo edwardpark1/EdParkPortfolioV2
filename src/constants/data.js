@@ -333,6 +333,10 @@ export const techSkills = [
                 title: 'REST APIs',
                 Icon: Icons.RestAPIIcon,
             },
+            {
+                title: 'LocalWP',
+                Icon: Icons.LocalWP,
+            },
         ],
     },
 ];
