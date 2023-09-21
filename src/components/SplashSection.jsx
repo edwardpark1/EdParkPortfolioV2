@@ -69,11 +69,11 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 // Therefore m=2.77777 b=1444.44444
                 this.mouseRadius = Math.ceil((2.77777 * this.width) + 1444.44444);
 
-                // minHeight: 300 maxHeight: 450
-                // 300 = m*200 + b    => x1=200; y1=300;
+                // minHeight: 200 maxHeight: 450
+                // 200 = m*200 + b    => x1=200; y1=200;
                 // 450 = m*1280 + b   => x2=1280; y2=450;
-                // Therefore m=0.1388 b=272.2222
-                this.height = Math.ceil((0.1388 * this.width) + 272.2222);
+                // Therefore m=0.2314 b=153.7037
+                this.height = Math.ceil((0.2314 * this.width) + 153.7037);
 
                 // 1 = m*200 + b    => x1=200; y1=1;
                 // 3 = m*1280 + b   => x2=1280; y2=3;
