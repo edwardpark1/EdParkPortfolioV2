@@ -91,9 +91,9 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 this.letterLineWidth = Math.ceil((0.00277 * this.width) + 0.44444);
 
                 // 30 = m * 200 + b    => x1=200; y1=30;
-                // 105 = m * 1280 + b   => x2=1280; y2=100;
-                // Therefore m=0.06481 b=17.03703
-                this.fontSize = Math.ceil((0.06481 * this.width) + 17.03703);
+                // 95 = m * 1280 + b   => x2=1280; y2=95;
+                // Therefore m=0.06018  b=17.96296
+                this.fontSize = Math.ceil((0.06018 * this.width) + 17.96296);
                 this.lineHeight = this.fontSize;
 
                 this.canvas.width = this.width;
@@ -229,8 +229,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             }
 
             spawnGlobe() {
-                this.currX += (this.vx *= this.friction) + (this.globeStartX - this.currX) * this.ease;
-                this.currY += (this.vy *= this.friction) + (this.globeStartY - this.currY) * this.ease;
+                this.currX += (this.globeStartX - this.currX) * this.ease;
+                this.currY += (this.globeStartY - this.currY) * this.ease;
 
                 if (this.globeStartX + 2 >= this.currX && this.globeStartY + 2 >= this.currY) {
                     // Ensures we increment count once per particle
@@ -240,8 +240,6 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                     }
 
                     if (effect.stageLock.getUnlockStatus()) {
-                        this.vx = 0;
-                        this.vy = 0;
                         this.stage.goToNextStage();
                     }
                 }
@@ -265,7 +263,6 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
 
             orbitGlobe() {
                 // Arbitrary increment value, higher the number, faster the globe moves
-                // 65
                 this.rotationSeed += 75;
 
                 const [globeX, globeY, size] = this.refreshGlobeParticle();
@@ -293,8 +290,8 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 const xDiff = (this.finalX - this.currX);
                 const yDiff = (this.finalY - this.currY);
 
-                this.currX += (this.vx *= this.friction) + xDiff * this.ease;
-                this.currY += (this.vy *= this.friction) + yDiff * this.ease;
+                this.currX += xDiff * this.ease;
+                this.currY += yDiff * this.ease;
 
                 // resize particle with respect to how close particle is to meeting its final point
                 const currentDistance = Math.sqrt((xDiff * xDiff) + (yDiff * yDiff));
@@ -553,8 +550,8 @@ export default function SplashSection({ splashMessage, isDarkMode, isErrorMode }
     return (
         <div className="relative w-[100%] flex flex-col flex-nowrap items-center justify-center gap-0 sm:gap-8 md:gap-9 lg:gap-10">
             <div className="relative sm:absolute sm:top-0 sm:right-0 flex flex-col flex-nowrap items-center justify-center mx-mobileBound sm:mr-8 text-center">
-                <p id="canvas-prompt" className="opacity-0 transition-[opacity] duration-[2000ms]">Hover Over Letters</p>
-                <svg id="canvas-arrow" className="opacity-0 transition-[opacity] duration-[2000ms] absolute sm:relative top-8 sm:top-auto animate-hero-pointer-bounce-mobile sm:animate-hero-pointer-bounce sm:mt-0 h-9 sm:h-10 md:h-11 lg:h-[80px]" enableBackground="new 0 0 122.433 122.88" version="1.1" viewBox="0 0 52.513 52.695" xmlns="http://www.w3.org/2000/svg">
+                <p id="canvas-prompt" className="opacity-0 transition-[opacity] duration-[1000ms]">Hover Over Letters</p>
+                <svg id="canvas-arrow" className="opacity-0 transition-[opacity] duration-[1000ms] absolute sm:relative top-8 sm:top-auto animate-hero-pointer-bounce-mobile sm:animate-hero-pointer-bounce sm:mt-0 h-9 sm:h-10 md:h-11 lg:h-[80px]" enableBackground="new 0 0 122.433 122.88" version="1.1" viewBox="0 0 52.513 52.695" xmlns="http://www.w3.org/2000/svg">
                     <title>Arrow pointing to animation canvas</title>
                     <g transform="matrix(.4069 0 0 .4069 1.3475 1.3475)" fill="hsl(var(--color-primBlue-200))" style={{ mixBlendMode: 'normal' }}>
                         <polygon points="0 59.207 39.403 59.207 39.403 0 83.033 0 83.033 59.207 122.43 59.207 61.216 122.88" clipRule="evenodd" fill="hsl(var(--color-primBlue-200))" fillRule="evenodd" />
