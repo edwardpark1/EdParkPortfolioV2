@@ -20,13 +20,14 @@ SplashSection.propTypes = {
 function UseHero({ message, isDarkMode, isErrorMode }) {
     const displayCanvasPrompt = useRef(true);
     const animationId = useRef();
-    const fps = 60;
-    const interval = Math.floor(1000 / fps);
-    const previousTime = useRef(performance.now());
+
 
     useEffect(() => {
         const canvasPrompt = document.getElementById('canvas-prompt');
         const canvasArrow = document.getElementById('canvas-arrow');
+        const fps = 60;
+        const interval = Math.floor(1000 / fps);
+        let previousTime = performance.now();
 
         class HeroCanvas {
             constructor(splashMessage) {
@@ -518,10 +519,10 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
 
         function isNextFrame(timestamp) {
             const currentTime = timestamp;
-            const deltaTime = currentTime - previousTime.current;
+            const deltaTime = currentTime - previousTime;
 
             if (deltaTime > interval) {
-                previousTime.current = currentTime - (deltaTime % interval);
+                previousTime = currentTime - (deltaTime % interval);
 
                 return currentTime
             }
