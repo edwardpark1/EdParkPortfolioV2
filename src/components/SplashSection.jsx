@@ -276,7 +276,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
                 this.currSize = size;
 
                 // Rotation duration
-                if (this.repeat > 130) {
+                if (this.repeat > 110) {
                     // Particle can be at any point record its current distance to final X and Y
                     const xDiff = (this.currX - this.finalX);
                     const yDiff = (this.currY - this.finalY);
