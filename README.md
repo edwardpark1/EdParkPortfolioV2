@@ -69,7 +69,7 @@ $ npm run build
 This project is licensed under the terms of the MIT license. See the [LICENSE](./LICENSE) file for details.
 
 ## Credit
-<p>Ed Park</p>
+- [@edwardpark1](https://github.com/edwardpark1)
 
 [![Portfolio Website](https://img.shields.io/badge/Portfolio-Website-061178?style=plastic&logoColor=D9E8FF&labelColor=061178)](https://edpark.space/)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-Profile-061178?style=plastic&logo=github&logoColor=D9E8FF&labelColor=061178)](https://github.com/edwardpark1)
