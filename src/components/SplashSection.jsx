@@ -20,6 +20,9 @@ SplashSection.propTypes = {
 function UseHero({ message, isDarkMode, isErrorMode }) {
     const displayCanvasPrompt = useRef(true);
     const animationId = useRef();
+    const fps = 60;
+    const interval = Math.floor(1000 / fps);
+    const previousTime = useRef(performance.now());
 
     useEffect(() => {
         const canvasPrompt = document.getElementById('canvas-prompt');
@@ -502,10 +505,28 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
             effect.mouse.y = locY - elemOffset.top;
         }
 
-        function animate() {
-            heroCanvas.ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-            effect.render();
+        function animate(timestamp) {
+            const nextTime = isNextFrame(timestamp);
+
+            if (nextTime) {
+                heroCanvas.ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                effect.render();
+            }
+
             animationId.current = window.requestAnimationFrame(animate);
+        }
+
+        function isNextFrame(timestamp) {
+            const currentTime = timestamp;
+            const deltaTime = currentTime - previousTime.current;
+
+            if (deltaTime > interval) {
+                previousTime.current = currentTime - (deltaTime % interval);
+
+                return currentTime
+            }
+
+            return false;
         }
 
         function resetCanvas() {
@@ -529,6 +550,7 @@ function UseHero({ message, isDarkMode, isErrorMode }) {
         effect.render();
         animate();
 
+        // This is to delay resetCanvas if user is in middle of resizing window
         function resizeAnimationHandle() {
             clearTimeout(timeoutReset);
             timeoutReset = setTimeout(resetCanvas, 500);
