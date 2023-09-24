@@ -21,7 +21,11 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 - Light/ dark mode
 - Cube image carousel
 - Glassmorphism elements
+- 3D elements
+- Contact Form
+- Resume in webpage design
 - Responsive design
+- Custom 404 page
 
 ![Particle animation section of my portfolio](public/assets/portfolio-preview.gif)
 
