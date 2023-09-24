@@ -17,7 +17,7 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 ------------
 
 ## Key Features
-- Interactive particle animation splash section
+- ~~Interactive particle animation splash section~~
 - Light/ dark mode
 - Cube image carousel
 - Glassmorphism elements
