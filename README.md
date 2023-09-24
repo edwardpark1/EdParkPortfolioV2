@@ -17,7 +17,7 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 ------------
 
 ## Key Features
-- ~~Interactive particle animation splash section~~
+- Interactive particle animation splash section
 - Light/ dark mode
 - Cube image carousel
 - Glassmorphism elements
@@ -26,7 +26,7 @@ Welcome to my web developer portfolio. This is a space to showcase my passion fo
 ![Particle animation section of my portfolio](public/assets/portfolio-preview.gif)
 
 ## Ideas for Future Implementation
-- Implement delta time and FPS for canvas animation
+- ~~Implement delta time and FPS for canvas animation~~ (Completed)
 - Option for reduced motion
 - Enable testimonials section to accomodate more than one entry
 - Custom mouse pointer
