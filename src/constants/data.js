@@ -195,6 +195,10 @@ export const techSkills = [
                 Icon: Icons.TailwindCSSIcon,
             },
             {
+                title: 'SASS, SCSS',
+                Icon: Icons.SassIcon,
+            },
+            {
                 title: 'JavaScript',
                 Icon: Icons.JavascriptIcon,
             },
@@ -245,10 +249,6 @@ export const techSkills = [
                 Icon: Icons.CsharpIcon,
             },
             {
-                title: 'Java',
-                Icon: Icons.JavaIcon,
-            },
-            {
                 title: 'VBA',
                 Icon: Icons.VBIcon,
             },
@@ -260,10 +260,6 @@ export const techSkills = [
             {
                 title: 'WordPress',
                 Icon: Icons.WordPressIcon,
-            },
-            {
-                title: 'Webflow',
-                Icon: Icons.WebflowIcon,
             },
             {
                 title: 'Wix',
@@ -374,8 +370,8 @@ export const workExp = [
         tasks: [
             "Collaborate directly with clients to gather project requirements, provide regular updates, and deliver solutions that tailored to their specific needs",
             "Conduct competitor analysis to identify clients' opportunities for differentiation and growth",
-            "Leverage strong problem-solving skills to troubleshoot and resolve technical challenges, resulting in seamless and functional websites",
-            "Demonstrate expertise in designing custom WordPress themes and plugins, enhancing website functionality and user interactivity",
+            "Setup API calls and database structures for streamlining clients' business requirements",
+            "Demonstrate expertise in designing custom WordPress themes and plugins in PHP, enhancing website functionality and user interactivity",
         ],
     },
     {
@@ -409,10 +405,11 @@ export const workExp = [
             "Ranked number one in my department on process quality and defects testing by standardizing automation and fail-safes",
             "Provided technical support for remote production sites to facilitate the completion of device configurations",
             "Collaborated with a small team to improve processes",
-            "Designed .NET desktop application solutions to support engineers",
+            "Designed C# and .NET desktop application solutions to support engineers",
             "Successfully completed project of revamping Extract-Transform-Load system that led to 95% improved efficiency in terms of execution time, and incorporated troubleshooting features",
             "Designed and managed secure SharePoint websites for clients",
-            "Wrote ad-hoc queries for statistical analysis",
+            "Wrote ad-hoc SQL queries for statistical analysis",
+            "Wrote macros in Excel to populate customer data on printer labels",
         ],
     },
 ];
@@ -446,7 +443,7 @@ export const extracurriculars = [
             {
                 title: 'Digital Volunteer',
                 startDate: new Date(2022, 3),
-                endDate: 'present',
+                endDate: new Date(2023, 9),
             },
         ],
         tasks: [
